@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>For Ife ❤️</title>
@@ -17,19 +16,16 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow:hidden;
 }
 
 .container{
   background:white;
-  padding:35px;
+  padding:30px;
   border-radius:20px;
-  box-shadow:0 15px 30px rgba(0,0,0,0.2);
+  box-shadow:0 12px 25px rgba(0,0,0,0.2);
   text-align:center;
   max-width:360px;
   width:90%;
-  min-height:280px;
-  position:relative;
 }
 
 h1,h2{
@@ -42,195 +38,12 @@ p{
 }
 
 button{
-  padding:14px 28px;
-  font-size:18px;
+  padding:14px 26px;
+  font-size:17px;
   border:none;
   border-radius:10px;
   cursor:pointer;
-  margin:10px;
-  transition:0.2s;
-}
 
-#yesBtn{
-  background:#ff3366;
-  color:white;
-}
-
-#noBtn{
-  background:#ddd;
-  position:absolute;
-}
-
-.fade{
-  animation:fadeIn 1.2s ease;
-}
-
-@keyframes fadeIn{
-  from{opacity:0;transform:scale(0.9);}
-  to{opacity:1;transform:scale(1);}
-}
-
-.hidden{
-  display:none;
-}
-
-.heart{
-  position:absolute;
-  font-size:20px;
-  animation:float 6s linear infinite;
-}
-
-@keyframes float{
-  from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(-600px);opacity:0;}
-}
-
-</style>
-</head>
-
-<body>
-
-<audio id="voice" src="voice.mp3" preload="auto"></audio>
-
-
-<!-- PAGE 1 -->
-<div class="container fade" id="page1">
-
-  <h1>Ife, Will You Be My Valentine? 💘</h1>
-
-  <div id="buttons">
-
-    <button id="yesBtn">Yes 😍</button>
-
-    <button id="noBtn">No 🙃</button>
-
-  </div>
-
-  <p id="message"></p>
-
-</div>
-
-
-<!-- PAGE 2 -->
-<div class="container fade hidden" id="page2">
-
-  <h1>Okay… I’m smiling now 😊❤️</h1>
-
-  <h2>Happy Valentine’s, Ife ❤️</h2>
-
-  <p>
-    I’m really glad you said yes.<br><br>
-    Can't wait to see you 😌
-  </p>
-
-  <p style="margin-top:20px;">
-    🎵 Play our song
-  </p>
-
-  <a href="https://open.spotify.com/search/Sexual%20Healing%20Marvin%20Gaye"
-     target="_blank"
-     style="color:#ff3366;font-weight:bold;text-decoration:none;">
-     Open “Sexual Healing” ❤️
-  </a>
-
-</div>
-
-
-<script>
-
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const voice = document.getElementById("voice");
-
-const page1 = document.getElementById("page1");
-const page2 = document.getElementById("page2");
-
-const message = document.getElementById("message");
-
-const texts = [
-  "Chaiiiiii 😏",
-  "Na wa ooooooo 😂",
-  "Na wa oooo 😌",
-  "You’re stubborn 😄",
-  "I’m not giving up 😉"
-];
-
-let index = 0;
-
-
-// Move No (works on phone + PC)
-function moveNo(){
-
-  const box = page1.getBoundingClientRect();
-
-  const maxX = box.width - noBtn.offsetWidth - 20;
-  const maxY = box.height - noBtn.offsetHeight - 20;
-
-  const x = Math.random()*maxX;
-  const y = Math.random()*maxY;
-
-  noBtn.style.left = x+"px";
-  noBtn.style.top = y+"px";
-
-  message.innerText = texts[index];
-
-  index = (index+1)%texts.length;
-}
-
-
-// Desktop hover
-noBtn.addEventListener("mouseover", moveNo);
-
-// Mobile touch
-noBtn.addEventListener("touchstart", function(e){
-  e.preventDefault();
-  moveNo();
-});
-
-
-// Yes click
-yesBtn.addEventListener("click", ()=>{
-
-  if(voice){
-    voice.volume = 0.8;
-    voice.play().catch(()=>{});
-  }
-
-  setTimeout(()=>{
-
-    page1.classList.add("hidden");
-    page2.classList.remove("hidden");
-
-  },400);
-
-});
-
-
-// Hearts
-function createHeart(){
-
-  const heart = document.createElement("div");
-
-  heart.className = "heart";
-  heart.innerText = "❤️";
-
-  heart.style.left = Math.random()*window.innerWidth+"px";
-  heart.style.bottom = "0px";
-
-  document.body.appendChild(heart);
-
-  setTimeout(()=>{
-    heart.remove();
-  },6000);
-
-}
-
-setInterval(createHeart,700);
-
-</script>
-
-</body>
-</html>
 
 
 
