@@ -93,6 +93,7 @@ button {
 
 <body>
 
+<!-- Voice Note -->
 <audio id="voice" src="voice.mp3"></audio>
 
 <div class="container" id="box">
@@ -113,11 +114,13 @@ const messages = [
   "Na wa ooooooo 😂",
   "Na wa oooo 😌",
   "This is getting serious 😄",
-  "I’m not giving up 😉"
+  "I no go gree ooooo 😉"
 ];
 
 let i = 0;
 
+
+// Move No button
 function moveNo() {
 
   const no = document.getElementById("no");
@@ -154,37 +157,18 @@ function createHeart() {
 setInterval(createHeart, 500);
 
 
+// Yes button
 function yesClick() {
 
-  document.getElementById("voice").play();
+  const voice = document.getElementById("voice");
 
-  document.body.innerHTML = `
-    <div class="container fade">
+  // Play voice first
+  voice.play();
 
-      <h1>Okay… I’m smiling now 😊❤️</h1>
+  // Wait before changing page
+  setTimeout(() => {
 
-      <h2>Happy Valentine’s, Ife❤️ </h2>
+    document.body.innerHTML = `
+      <div class="container fade">
 
-      <p>
-        I’m really glad you said yes.<br><br>
-        Can't wait to see you 😌
-      </p>
-
-      <p style="margin-top:20px;">
-        🎵 Play our song
-      </p>
-
-      <a href="https://open.spotify.com/search/Sexual%20Healing%20Marvin%20Gaye"
-         target="_blank"
-         style="color:#ff3366; font-weight:bold; text-decoration:none;">
-         Open “Sexual Healing” ❤️
-      </a>
-
-    </div>
-  `;
-}
-
-</script>
-
-</body>
-</html>
+        <h
