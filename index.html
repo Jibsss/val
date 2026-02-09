@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>For Ife ❤️</title>
@@ -43,6 +44,137 @@ button{
   border:none;
   border-radius:10px;
   cursor:pointer;
+  margin:8px;
+}
+
+#yesBtn{
+  background:#ff3366;
+  color:white;
+}
+
+#noBtn{
+  background:#ddd;
+}
+
+.fade{
+  animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(0.95);}
+  to{opacity:1;transform:scale(1);}
+}
+
+.hidden{
+  display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Voice note -->
+<audio id="voice" src="voice.mp3" preload="auto"></audio>
+
+
+<!-- PAGE 1 -->
+<div class="container fade" id="page1">
+
+  <h1>Ife, Will You Be My Valentine? 💘</h1>
+
+  <div>
+
+    <button id="yesBtn">Yes 😍</button>
+
+    <button id="noBtn">No 🙃</button>
+
+  </div>
+
+  <p id="message"></p>
+
+</div>
+
+
+<!-- PAGE 2 -->
+<div class="container fade hidden" id="page2">
+
+  <h1>Okay… I’m smiling now 😊❤️</h1>
+
+  <h2>Happy Valentine’s, Ife ❤️</h2>
+
+  <p>
+    I’m really glad you said yes.<br><br>
+    Can't wait to see you 😌
+  </p>
+
+  <p style="margin-top:15px;">
+    🎵 Play our song
+  </p>
+
+  <a href="https://open.spotify.com/search/Sexual%20Healing%20Marvin%20Gaye"
+     target="_blank"
+     style="color:#ff3366;font-weight:bold;text-decoration:none;">
+     Open “Sexual Healing” ❤️
+  </a>
+
+</div>
+
+
+<script>
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const voice = document.getElementById("voice");
+
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+
+const message = document.getElementById("message");
+
+const texts = [
+  "Are you sure? 😏",
+  "Think well o 😂",
+  "Na wa oooooo 😌",
+  "AHH, I don dieeee😄",
+  "Okay… just click Yes, Your shakara too much self!!!"
+];
+
+let index = 0;
+
+
+// No button changes text (mobile safe)
+noBtn.addEventListener("click", ()=>{
+
+  message.innerText = texts[index];
+
+  index = (index+1)%texts.length;
+
+});
+
+
+// Yes click (audio safe)
+yesBtn.addEventListener("click", ()=>{
+
+  if(voice){
+    voice.volume = 0.8;
+    voice.play().catch(()=>{});
+  }
+
+  setTimeout(()=>{
+
+    page1.classList.add("hidden");
+    page2.classList.remove("hidden");
+
+  },400);
+
+});
+
+</script>
+
+</body>
+</html>
+
 
 
 
