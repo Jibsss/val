@@ -9,8 +9,6 @@
 
 <style>
 
-/* ========== GENERAL ========== */
-
 body{
   margin:0;
   height:100vh;
@@ -34,8 +32,6 @@ body{
   position:relative;
 }
 
-/* ========== TEXT ========== */
-
 h1,h2{
   color:#cc0033;
 }
@@ -44,8 +40,6 @@ p{
   color:#66001a;
   font-size:17px;
 }
-
-/* ========== BUTTONS ========== */
 
 button{
   padding:14px 28px;
@@ -64,13 +58,11 @@ button{
 
 #noBtn{
   background:#ddd;
-  position:relative;
+  position:absolute;
 }
 
-/* ========== ANIMATION ========== */
-
 .fade{
-  animation:fadeIn 1.3s ease;
+  animation:fadeIn 1.2s ease;
 }
 
 @keyframes fadeIn{
@@ -78,7 +70,9 @@ button{
   to{opacity:1;transform:scale(1);}
 }
 
-/* ========== HEARTS ========== */
+.hidden{
+  display:none;
+}
 
 .heart{
   position:absolute;
@@ -91,19 +85,13 @@ button{
   to{transform:translateY(-600px);opacity:0;}
 }
 
-/* ========== HIDE PAGES ========== */
-
-.hidden{
-  display:none;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- AUDIO -->
 <audio id="voice" src="voice.mp3" preload="auto"></audio>
+
 
 <!-- PAGE 1 -->
 <div class="container fade" id="page1">
@@ -150,8 +138,6 @@ button{
 
 <script>
 
-/* ========== VARIABLES ========== */
-
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const voice = document.getElementById("voice");
@@ -172,34 +158,44 @@ const texts = [
 let index = 0;
 
 
-/* ========== NO BUTTON MOVE ========== */
+// Move No (works on phone + PC)
+function moveNo(){
 
-noBtn.addEventListener("mouseenter", ()=>{
+  const box = page1.getBoundingClientRect();
 
-  const moveX = (Math.random()*80)-40;
-  const moveY = (Math.random()*40)-20;
+  const maxX = box.width - noBtn.offsetWidth - 20;
+  const maxY = box.height - noBtn.offsetHeight - 20;
 
-  noBtn.style.left = moveX+"px";
-  noBtn.style.top = moveY+"px";
+  const x = Math.random()*maxX;
+  const y = Math.random()*maxY;
+
+  noBtn.style.left = x+"px";
+  noBtn.style.top = y+"px";
 
   message.innerText = texts[index];
 
   index = (index+1)%texts.length;
+}
 
+
+// Desktop hover
+noBtn.addEventListener("mouseover", moveNo);
+
+// Mobile touch
+noBtn.addEventListener("touchstart", function(e){
+  e.preventDefault();
+  moveNo();
 });
 
 
-/* ========== YES CLICK ========== */
-
+// Yes click
 yesBtn.addEventListener("click", ()=>{
 
-  // Play audio safely
   if(voice){
     voice.volume = 0.8;
     voice.play().catch(()=>{});
   }
 
-  // Switch pages
   setTimeout(()=>{
 
     page1.classList.add("hidden");
@@ -210,8 +206,7 @@ yesBtn.addEventListener("click", ()=>{
 });
 
 
-/* ========== HEART EFFECT ========== */
-
+// Hearts
 function createHeart(){
 
   const heart = document.createElement("div");
@@ -230,12 +225,13 @@ function createHeart(){
 
 }
 
-setInterval(createHeart,600);
+setInterval(createHeart,700);
 
 </script>
 
 </body>
 </html>
+
 
 
 
