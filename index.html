@@ -25,6 +25,8 @@ body {
   position: relative;
   z-index: 2;
   max-width: 350px;
+  width: 90%;
+  min-height: 260px;
 }
 
 h1 {
@@ -49,12 +51,15 @@ button {
 #no {
   background: #ddd;
   position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #message {
   margin-top: 15px;
   font-size: 18px;
   color: #66001a;
+  min-height: 24px;
 }
 
 .heart {
@@ -114,19 +119,25 @@ const messages = [
   "Na wa ooooooo 😂",
   "Na wa oooo 😌",
   "This is getting serious 😄",
-  "I no go gree ooooo 😉"
+  "I’m not giving up 😉"
 ];
 
 let i = 0;
 
 
-// Move No button
+// Move No button (stay inside box)
 function moveNo() {
 
   const no = document.getElementById("no");
+  const box = document.getElementById("box");
 
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 100);
+  const boxRect = box.getBoundingClientRect();
+
+  const maxX = boxRect.width - 120;
+  const maxY = boxRect.height - 80;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
   no.style.left = x + "px";
   no.style.top = y + "px";
@@ -171,4 +182,33 @@ function yesClick() {
     document.body.innerHTML = `
       <div class="container fade">
 
-        <h
+        <h1>Okay… I’m smiling now 😊❤️</h1>
+
+        <h2>Happy Valentine’s, Ife ❤️</h2>
+
+        <p>
+          I’m really glad you said yes.<br><br>
+          Can't wait to see you 😌
+        </p>
+
+        <p style="margin-top:20px;">
+          🎵 Play our song
+        </p>
+
+        <a href="https://open.spotify.com/search/Sexual%20Healing%20Marvin%20Gaye"
+           target="_blank"
+           style="color:#ff3366; font-weight:bold; text-decoration:none;">
+           Open “Sexual Healing” ❤️
+        </a>
+
+      </div>
+    `;
+
+  }, 500);
+}
+
+</script>
+
+</body>
+</html>
+
