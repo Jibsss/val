@@ -1,103 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For Ife ❤️</title>
+<meta charset="UTF-8">
+<title>For Ife ❤️</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fff0f5;
-      text-align: center;
-      padding-top: 100px;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    h1 {
-      color: #cc0033;
-    }
+.container {
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 2;
+  max-width: 350px;
+}
 
-    button {
-      padding: 15px 28px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 12px;
-      transition: 0.3s;
-    }
+h1 {
+  color: #cc0033;
+}
 
-    .yes-btn {
-      background: #ff3366;
-      color: white;
-    }
+button {
+  padding: 14px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 12px;
+  transition: 0.3s;
+}
 
-    .no-btn {
-      background: #ddd;
-    }
+#yes {
+  background: #ff3366;
+  color: white;
+}
 
-    #message {
-      font-size: 19px;
-      margin-top: 25px;
-      color: #66001a;
-      min-height: 24px;
-    }
-  </style>
+#no {
+  background: #ddd;
+  position: absolute;
+}
+
+#message {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #66001a;
+}
+
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-600px);
+    opacity: 0;
+  }
+}
+
+.fade {
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+</style>
 </head>
 
 <body>
 
+<audio id="voice" src="voice.mp3"></audio>
+
+<div class="container" id="box">
+
   <h1>Ife, Will You Be My Valentine? 💘</h1>
 
-  <button class="yes-btn" onclick="handleYes()">Yes 😍</button>
-  <button class="no-btn" onclick="handleNo()">No 🙃</button>
+  <button id="yes" onclick="yesClick()">Yes 😍</button>
+  <button id="no" onmouseover="moveNo()">No 🙃</button>
 
   <p id="message"></p>
 
+</div>
+
 <script>
 
-  const messages = [
-    "Interesting choice… 🤨",
-    "You’re really testing my patience 😌",
-    "Let’s not pretend you don’t like me 😏",
-    "Okay, but we both know where this is going 😄",
-    "Still pressing No? Respect 😂",
-    "This is getting suspicious 😆",
-    "Fine… I’ll wait 😉"
-  ];
+const messages = [
+  "Chaiiiiii 😏",
+  "Na wa ooooooo 😂",
+  "Na wa oooo 😌",
+  "This is getting serious 😄",
+  "I’m not giving up 😉"
+];
 
-  let index = 0;
+let i = 0;
 
-  function handleNo() {
+function moveNo() {
 
-    document.getElementById("message").innerText = messages[index];
+  const no = document.getElementById("no");
 
-    index = (index + 1) % messages.length;
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
 
-    const yesBtn = document.querySelector(".yes-btn");
-    const size = window.getComputedStyle(yesBtn).fontSize;
-    const current = parseFloat(size);
+  no.style.left = x + "px";
+  no.style.top = y + "px";
 
-    yesBtn.style.fontSize = (current * 1.2) + "px";
-  }
+  document.getElementById("message").innerText = messages[i];
+
+  i = (i + 1) % messages.length;
+}
 
 
-  function handleYes() {
+// Floating hearts
+function createHeart() {
 
-    document.body.innerHTML = `
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "❤️";
+
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.bottom = "0px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+setInterval(createHeart, 500);
+
+
+function yesClick() {
+
+  document.getElementById("voice").play();
+
+  document.body.innerHTML = `
+    <div class="container fade">
+
       <h1>Okay… I’m smiling now 😊❤️</h1>
 
-      <h2>Happy Valentine’s, Ife</h2>
+      <h2>Happy Valentine’s, Ife❤️ </h2>
 
       <p>
         I’m really glad you said yes.<br><br>
-        You mean a lot to me.
+        Can't wait to see you 😌
       </p>
 
-      <p>
-        Let’s make it a good one 😌
+      <p style="margin-top:20px;">
+        🎵 Play our song
       </p>
-    `;
-  }
+
+      <a href="https://open.spotify.com/search/Sexual%20Healing%20Marvin%20Gaye"
+         target="_blank"
+         style="color:#ff3366; font-weight:bold; text-decoration:none;">
+         Open “Sexual Healing” ❤️
+      </a>
+
+    </div>
+  `;
+}
 
 </script>
 
