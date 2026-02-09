@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Ife ❤️</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff0f5;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      color: #cc0033;
+    }
+
+    button {
+      padding: 15px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 12px;
+      transition: 0.3s;
+    }
+
+    .yes-btn {
+      background: #ff3366;
+      color: white;
+    }
+
+    .no-btn {
+      background: #ddd;
+    }
+
+    #message {
+      font-size: 19px;
+      margin-top: 25px;
+      color: #66001a;
+      min-height: 24px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Ife, Will You Be My Valentine? 💘</h1>
+
+  <button class="yes-btn" onclick="handleYes()">Yes 😍</button>
+  <button class="no-btn" onclick="handleNo()">No 🙃</button>
+
+  <p id="message"></p>
+
+<script>
+
+  const messages = [
+    "Interesting choice… 🤨",
+    "You’re really testing my patience 😌",
+    "Let’s not pretend you don’t like me 😏",
+    "Okay, but we both know where this is going 😄",
+    "Still pressing No? Respect 😂",
+    "This is getting suspicious 😆",
+    "Fine… I’ll wait 😉"
+  ];
+
+  let index = 0;
+
+  function handleNo() {
+
+    document.getElementById("message").innerText = messages[index];
+
+    index = (index + 1) % messages.length;
+
+    const yesBtn = document.querySelector(".yes-btn");
+    const size = window.getComputedStyle(yesBtn).fontSize;
+    const current = parseFloat(size);
+
+    yesBtn.style.fontSize = (current * 1.2) + "px";
+  }
+
+
+  function handleYes() {
+
+    document.body.innerHTML = `
+      <h1>Okay… I’m smiling now 😊❤️</h1>
+
+      <h2>Happy Valentine’s, Ife</h2>
+
+      <p>
+        I’m really glad you said yes.<br><br>
+        You mean a lot to me.
+      </p>
+
+      <p>
+        Let’s make it a good one 😌
+      </p>
+    `;
+  }
+
+</script>
+
+</body>
+</html>
