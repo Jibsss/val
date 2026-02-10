@@ -56,6 +56,10 @@ button{
   background:#ddd;
 }
 
+.hidden{
+  display:none;
+}
+
 .fade{
   animation:fadeIn 1s ease;
 }
@@ -65,17 +69,15 @@ button{
   to{opacity:1;transform:scale(1);}
 }
 
-.hidden{
-  display:none;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- Voice note -->
-<audio id="voice" src="voice.mp3" preload="auto"></audio>
+<!-- AUDIO -->
+<audio id="voice" preload="auto">
+  <source src="voice.mp3" type="audio/mpeg">
+</audio>
 
 
 <!-- PAGE 1 -->
@@ -99,14 +101,13 @@ button{
 <!-- PAGE 2 -->
 <div class="container fade hidden" id="page2">
 
-  <h1>You No Go Say Yes Ke? 😏</h1>
-  <h1>Not Like You Were Going To Say Something Else 😏</h1>
+  <h1>Okay… I’m smiling now 😊❤️</h1>
 
-  <h2>Happy Valentine’s Day, Ife....Love You Everday, Twice On Sundays ❤️</h2>
+  <h2>Happy Valentine’s, Ife ❤️</h2>
 
   <p>
     I’m really glad you said yes.<br><br>
-    Can't wait to see you 😌
+    Can’t wait to see you 😌
   </p>
 
   <p style="margin-top:15px;">
@@ -136,16 +137,15 @@ const message = document.getElementById("message");
 const texts = [
   "Are you sure? 😏",
   "Think well o 😂",
-  "Na wa oooooo 😂",
-  "AHH, I don dieeee😂",
-  "INVOLVE MEE NAAA IS IT NOT ME THAT PAID FOR IT?😂",
-  "Okay… just click Yes, Your shakara too much self!!!"
+  "Don’t break my heart 😌",
+  "Last chance 😄",
+  "Okay… just click Yes ❤️"
 ];
 
 let index = 0;
 
 
-// No button changes text (mobile safe)
+// NO button message
 noBtn.addEventListener("click", ()=>{
 
   message.innerText = texts[index];
@@ -155,12 +155,14 @@ noBtn.addEventListener("click", ()=>{
 });
 
 
-// Yes click (audio safe)
-yesBtn.addEventListener("click", ()=>{
+// YES button (mobile safe audio)
+yesBtn.addEventListener("click", async ()=>{
 
-  if(voice){
-    voice.volume = 0.8;
-    voice.play().catch(()=>{});
+  try{
+    await voice.play();
+  }catch(e){
+    voice.muted = false;
+    voice.play();
   }
 
   setTimeout(()=>{
@@ -168,7 +170,7 @@ yesBtn.addEventListener("click", ()=>{
     page1.classList.add("hidden");
     page2.classList.remove("hidden");
 
-  },400);
+  },300);
 
 });
 
@@ -176,9 +178,3 @@ yesBtn.addEventListener("click", ()=>{
 
 </body>
 </html>
-
-
-
-
-
-
